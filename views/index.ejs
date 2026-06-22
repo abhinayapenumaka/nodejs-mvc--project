@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Inventory Management</h1>
+    <h2>Add New Item</h2>
+    <form action = "/items" method="POST">
+        <input type="text" name="name" placeholder="Item Name" required>
+        <input type="number" name="quantity" placeholder="Item quantity" required>
+        <input type="text" name = "description" placeholder="Item Description" required>
+        <button type ="submit">Add Item</button>
+    </form>
+    <hr>
+    <h2>Current Items</h2>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>quantity</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% items.forEach(item=>{%>
+            <tr>
+                <td><%=item.name %></td>
+                <td><%=item.quantity %></td>
+                <td><%=item.description %></td>
+                <td>
+                    <a href="/items/update/<%=item._id%>">edit</a>
+                     <form action="/items/delete/<%= item._id %>" method="POST" style="display:inline;">
+                        <button type="submit" style="background:none; border:none; color:blue; cursor:pointer; padding:0; text-decoration:underline;">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
